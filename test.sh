@@ -29,10 +29,10 @@ do
 	then
 		if [ `diff -bB $out outputs/$script.out | wc -l` -ne 0 ] 
 		then
-			echo "test $script: failed"
+			echo "$script: failed"
 			num_failed=$((num_failed + 1))
 		else
-			echo "test $script: passed"
+			echo "$script: passed"
 		fi
 		rm -f $out
 	else
@@ -72,11 +72,11 @@ do
 			then
 				if [ `diff -bB $out outputs/$PROG.$i.out | wc -l` -ne 0 ] 
 				then
-					echo "test $i: failed"
+					echo "$PROG test $i: failed"
 					#cat inputs/$PROG.$i.in
 					num_failed=$((num_failed + 1))
 				else
-					echo "test $i: passed"
+					echo "$PROG test $i: passed"
 				fi
 				rm -f $out
 			else
@@ -97,4 +97,6 @@ elif [ $num_failed -eq 0 ]
 then
 	echo "$PROG: passed everything 🎉"
 fi
+# Run style checker
+java -jar ~cs2030s/bin/checkstyle.jar -c ~cs2030s/bin/cs2030_checks.xml *.java 
 # vim:noexpandtab:sw=4:ts=4
