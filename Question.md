@@ -48,7 +48,7 @@ You are encouraged to consider your tutor's feedback and fix any issues with you
 
 ## Skeleton for Lab 3
 
-We only provide three classes for Lab 3, the main `Lab3.java` (which is simply `Lab2.java` renamed), `QueueTest.jsh` to test your `Queue<T>` class, and `ArrayTest.jsh` to test your `Array<T>` classes.
+We only provide three files for Lab 3, the main `Lab3.java` (which is simply `Lab2.java` renamed), `QueueTest.jsh` to test your `Queue<T>` class, and `ArrayTest.jsh` to test your `Array<T>` classes.
 
 All three files should not be modified for this lab.
 
@@ -64,16 +64,16 @@ The file `QueueTest.jsh` helps to test your `Queue<T>` class (see "Running and T
 
 ### 2. Create a generic `Array<T>` class
 
-Let's call the class that encapsulates the counter `ServiceCounter` (you may name it differently).  We have been using an array to store the `ServiceCounter` objects.  In Lab 3, you should replace that with a generic wrapper around arrays.  In other words, we want to replace `ServiceCounter[]` with `Array<ServiceCounter>`.  You may build upon the `Array<T>` class from [Unit 22](https://nus-cs2030s.github.io/2021-s2/22-unchecked.html).
+Let's call the class that encapsulates the counter `ServiceCounter` (you may name it differently).  We have been using an array to store the `ServiceCounter` objects.  In Lab 3, you should replace that with a generic wrapper around an array.  In other words, we want to replace `ServiceCounter[]` with `Array<ServiceCounter>`.  You may build upon the `Array<T>` class from [Unit 22](https://nus-cs2030s.github.io/2021-s2/22-unchecked.html).
 
-Make `Array<T>` takes in only types that implement the `Comparable<T>` interfaces as type arguments.  That is, we want to put only types that can compare with itself into our `Array<T>` class.
+Additionally, you need to make `Array<T>` takes in only a subtype of `Comparable<T>` as its type argument.  That is, we want to parameterize `Array<T>` with only a `T` that can compare with itself.
 
-The `Array<T>` class should additionally support the `min` method, with the following signature:
+The `Array<T>` class must additionally support the `min` method, with the following signature:
 ```
 T min()
 ```
 
-which returns the minimum element (based on the order defined by the `compareTo` method).
+which returns the minimum element (based on the order defined by the `compareTo` method of the `Comparable<T>` interface).
 
 Note that in implementing `Array<T>`, you will find another situation where using raw type is necessary.
 
@@ -81,9 +81,9 @@ The file `ArrayTest.jsh` contains test cases to test your `Array<T>` class (see 
 
 ### 3. Make Your `ServiceCounter` Comparable to Itself
 
-Your class that encapsulates the service counter should now implement the `Comparable<T>` interface so that it can compare with itself and we can use `ServiceCounter` as a type argument for `Array<T>`.  
+Your class that encapsulates the service counter must now implement the `Comparable<T>` interface so that it can compare with itself and it can be used as a type argument for `Array<T>`.  
 
-You should implement `compareTo` in such a way that `counters.min()` returns the counter that a customer should join.
+You should implement `compareTo` in such a way that `counters.min()` returns the counter that a customer should join (unless all the counter queues have reached maximum length).
 
 ### 4. Update Your Simulation
 
@@ -93,7 +93,7 @@ By incorporating `Queue<T>`, `Array<T>`, `ServiceCounter`, modify your simulatio
 
 We also need to make the following changes to the input and output of the program.
 
-1. There is an additional input parameter, an integer l, indicating the maximum allowed length of the counter queue.  This input parameter should be read immediately after reading the number of service counters and before the maximum allowed length of the entrance queue.
+1. There is an additional input parameter, an integer L, indicating the maximum allowed length of the counter queue.  This input parameter should be read immediately _after_ reading the number of service counters and _before_ the maximum allowed length of the entrance queue.
 
 2. Now that we have two types of queues, if a customer joins the entrance queue, the customer along with the queue _before_ joining should be printed as such:
 ```
@@ -139,9 +139,9 @@ The integrated `test.sh` now runs the two tests above before proceeding to test 
 
 ### Test Cases
 
-A series of test cases `Lab3.x.in` and `Lab3.x.out` are provided.  Test cases for `x` = 1 to 10 duplicate the corresponding test cases of Lab 2, with the input format updated to allow additional input of l (max counter queue length).   We set l to 0 in all these test cases. After your update your simulation to add counter queues, your code should still work for the scenarios in Lab 2 (except for small differences in the input and output format).
+A series of test cases `Lab3.x.in` and `Lab3.x.out` are provided.  Test cases for `x` = 1 to 10 duplicate the corresponding test cases of Lab 2, with the input format updated to allow additional input of L (max counter queue length).   We set L to 0 in all these test cases. After your update your simulation to add counter queues, your code should still work for the scenarios in Lab 2 (except for small differences in the input and output format).
 
-Test case x = 11 to 13 test cases where there is no entrance queue. The rest of the test cases test scenarios with both entrance and counter queues.
+Test case x = 11 to 13 are test cases without entrance queue (m = 0). The rest of the test cases test scenarios with both entrance and counter queues.
 
 ## Grading
 
