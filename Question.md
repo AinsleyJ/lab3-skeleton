@@ -155,6 +155,8 @@ This lab is worth 16 marks and contributes 4% to your final grade.  The marking 
 - Correctness: 3 marks
 - OO Design: 6 marks
 
+Note that the style marks is conditioned on evidence of efforts in solving Lab 3.  Simply resubmitting your Lab 2 solution as Lab 3 does not automatically earn you 2 style marks. 
+
 ## WARNING ❗️
 
 We would like to remind you of the following:
