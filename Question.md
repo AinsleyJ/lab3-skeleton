@@ -30,7 +30,7 @@ With the addition of counters, there is a change to the customer behavior in cho
 
 Note that, when a counter is done serving a customer, one customer from the entrance queue may join the counter queue of that counter.
 
-## Building on Lab 1
+## Building on Lab 2
 
 You are required to build on top of your Lab 2 submission for this lab.  
 
