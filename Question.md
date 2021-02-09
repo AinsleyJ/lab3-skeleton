@@ -1,7 +1,7 @@
 # Lab 3: Simulation 3
 
 - Deadline: 19 February 2021, Friday, 23:59 SST
-- Marks: 3%
+- Marks: 4%
 
 ## Prerequisite:
 
@@ -13,20 +13,20 @@
 
 This is a continuation of Lab 2.  Lab 3 changes some of the requirements of Lab 2 and adds some new things to the world that we are simulating.  The goal is to demonstrate that, when OO-principles are applied properly, we can adapt our code to changes in the requirement with less effort.
 
-Lab 3 also involves writing your own generic class.
+Lab 3 also involves writing your own generic classes.
 
 ## Queueing at The Counters
 
-Despite adding an entrance queue, the shop is still loosing customers.  With CNY coming, the shop decided to rearrange the layout and make some space for queues at the counters.  With that, customers can now wait at individual counters.
+Despite adding an entrance queue, the shop is still losing customers.  With CNY coming, the shop decided to rearrange the layout and make some space for queues at the counters.  With that, customers can now wait at individual counters.
 
-In this lab, we will modify the simulation to add a counter queue to each counter.  If the counter are busy when a customer arrives, the customer will join the queue and wait.  When a counter becomes available, the customer at the front of the queue will proceed to the counter for service.  Each counter queue has a maximum queue length of l.  If every counter queue has reached its maximum capacity of l, then an arriving customer has to wait at the entrance queue.
+In this lab, we will modify the simulation to add a counter queue to each counter.  If all the counters are busy when a customer arrives, the customer will join a queue and wait.  When a counter becomes available, the customer at the front of the queue will proceed to the counter for service.  Each counter queue has a maximum queue length of L.  If every counter queue has reached its maximum capacity of L, then an arriving customer has to wait at the entrance queue.
 
 Just like Lab 2, the entrance queue has a maximum queue length of m.  If there are already m customers waiting in the entrance queue, an arriving customer will be turned away.
 
 With the addition of counters, there is a change to the customer behavior in choosing which counter to join:
 
-- If there are more then one counters available, a customer will go to the counter with the smallest id (just like Lab 2)
-- If none of the counter is available, then the customer will join the counter with the shortest queue.  If there are two counters with the same queue length, we break ties with their id.
+- If more than one counter available, a customer will go to the counter with the smallest id (just like Lab 2)
+- If none of the counters is available, then the customer will join the counter with the shortest queue.  If there are two counters with the same queue length, we break ties with their id.
 
 Note that, when a counter is done serving a customer, one customer from the entrance queue may join the counter queue of that counter.
 
@@ -58,13 +58,13 @@ We suggest you solve this lab in the following order.
 
 ### 1. Make `Queue` a generic class
 
-The class `Queue` given to you in Lab 2 stores its elements as `Object` references, and therefore is not type-safe.  Now that you have learned abuot generics, you should update `Queue` to make it a generic class `Queue<T>`.
+The class `Queue` given to you in Lab 2 stores its elements as `Object` references, and therefore is not type-safe.  Now that you have learned about generics, you should update `Queue` to make it a generic class `Queue<T>`.
 
 The file `QueueTest.jsh` helps to test your `Queue<T>` class (see "Running and Testing" section below)
 
 ### 2. Create a generic `Array<T>` class
 
-Let's call the class the encapsulates the counter as `ServiceCounter` (you may name it differently).  We have been using an array to store the `ServiceCounter` objects.  In Lab 3, you should replace that with a generic wrapper around arrays.  In other words, we want to replace `ServiceCounter[]` with `Array<ServiceCounter>`.  You may build upon the `Array<T>` class from [Unit 22](https://nus-cs2030s.github.io/2021-s2/22-unchecked.html).
+Let's call the class that encapsulates the counter `ServiceCounter` (you may name it differently).  We have been using an array to store the `ServiceCounter` objects.  In Lab 3, you should replace that with a generic wrapper around arrays.  In other words, we want to replace `ServiceCounter[]` with `Array<ServiceCounter>`.  You may build upon the `Array<T>` class from [Unit 22](https://nus-cs2030s.github.io/2021-s2/22-unchecked.html).
 
 Make `Array<T>` takes in only types that implement the `Comparable<T>` interfaces as type arguments.  That is, we want to put only types that can compare with itself into our `Array<T>` class.
 
@@ -81,13 +81,13 @@ The file `ArrayTest.jsh` contains test cases to test your `Array<T>` class (see 
 
 ### 3. Make Your `ServiceCounter` Comparable to Itself
 
-Your class that encapsulates the service counter should now implements the `Comparable<T>` interface so that it can compare with itself and we can use `ServiceCounter` as a type argument for `Array<T>`.  
+Your class that encapsulates the service counter should now implement the `Comparable<T>` interface so that it can compare with itself and we can use `ServiceCounter` as a type argument for `Array<T>`.  
 
 You should implement `compareTo` in such a way that `counters.min()` returns the counter that a customer should join.
 
 ### 4. Update Your Simulation
 
-By incorperating `Queue<T>`, `Array<T>`, `ServiceCounter`, modify your simulation so that it implements the shop with counter queues as described above.
+By incorporating `Queue<T>`, `Array<T>`, `ServiceCounter`, modify your simulation so that it implements the shop with counter queues as described above.
 
 ### 5. Other Changes Needed
 
@@ -139,7 +139,7 @@ The integrated `test.sh` now runs the two tests above before proceeding to test 
 
 ### Test Cases
 
-A series of test cases `Lab3.x.in` and `Lab3.x.out` are provided.  Test cases for `x` = 1 to 10 duplicate the corresponding test cases of Lab 2, with the input format updated to allow additional input of l (max counter queue length).   We set l to 0 in all these test cases. After your update your simulation to add counter queues, you code should still work for the scenarios in Lab 2 (except small differences in the input and output format).
+A series of test cases `Lab3.x.in` and `Lab3.x.out` are provided.  Test cases for `x` = 1 to 10 duplicate the corresponding test cases of Lab 2, with the input format updated to allow additional input of l (max counter queue length).   We set l to 0 in all these test cases. After your update your simulation to add counter queues, your code should still work for the scenarios in Lab 2 (except for small differences in the input and output format).
 
 Test case x = 11 to 13 test cases where there is no entrance queue. The rest of the test cases test scenarios with both entrance and counter queues.
 
