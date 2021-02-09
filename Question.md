@@ -75,6 +75,8 @@ T min()
 
 which returns the minimum element (based on the order defined by the `compareTo` method).
 
+Note that in implementing `Array<T>`, you will find another situation where using raw type is necessary.
+
 The file `ArrayTest.jsh` contains test cases to test your `Array<T>` class (see "Running and Testing" section below).
 
 ### 3. Make Your `ServiceCounter` Comparable to Itself
