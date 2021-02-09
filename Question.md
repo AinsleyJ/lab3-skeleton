@@ -154,3 +154,10 @@ This lab is worth 16 marks and contributes 4% to your final grade.  The marking 
 - Style: 2 marks
 - Correctness: 3 marks
 - OO Design: 6 marks
+
+## WARNING ❗️
+
+We would like to remind you of the following:
+
+- Use only `submit-labX` script to submit your lab.  Failure to do so will lead to a 50% penalty of your lab grade.
+- The grace period for getting used to the submission system is over.  We will not waive late penalty if students fail to submit properly.  Please check your repo after running `submit-labX` to ensure that your files have been added correctly. The URL to your repo is given after you run `submit-labX`.
