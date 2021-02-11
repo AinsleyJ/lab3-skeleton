@@ -16,6 +16,7 @@ then
 	exit 1
 fi
 
+num_failed=0
 for script in $JSHELL_TESTS
 do
 	if [ $(uname) == "Darwin" ]
@@ -48,7 +49,6 @@ then
 	exit 1
 fi
 
-num_failed=0
 i=1
 while true
 do
